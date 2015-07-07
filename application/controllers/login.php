@@ -9,25 +9,29 @@ class Login extends CI_Controller
 		$this->load->library(array('session','form_validation'));
 		$this->load->helper(array('url','form'));
 		$this->load->database('default');
-		$this->output->enable_profiler(TRUE);
+		//if($userconfig = $this->session->userdata('userconfig')){	
+		//	redirect(base_url().'admin'); 
+		//}
+
     }
     // determinamos el perfil del usuario o le enviamos al login
    public function index()
 	{	
+
 		switch ($this->session->userdata('perfil')) {
 			case '':
 				$data['token'] = $this->token();
 				$data['titulo'] = 'Ingreso al sistema de talleres';
 				$this->load->view('login_view',$data);
 				break;
-			case 'superadmin':
-				redirect(base_url().'admin');
-				break;
 			case 'admin':
-				redirect(base_url().'editor');
+				redirect(base_url().'admin/user_management');
+				break;
+			case 'owner':
+				redirect(base_url().'admin/user_owner');
 				break;	
 			case 'worker':
-				redirect(base_url().'suscriptor');
+				redirect(base_url().'admin/user_worker');
 				break;
 			default:		
 				$data['titulo'] = 'Login con roles de usuario en codeigniter';
@@ -68,6 +72,7 @@ class Login extends CI_Controller
 				$datos = $this->login_model->datos_user($check_user);
 		
 					$this->session->set_userdata($datos);
+					//redirect(base_url().'admin');
 					$this->index();
 				}
 			}
