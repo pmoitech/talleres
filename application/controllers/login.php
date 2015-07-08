@@ -28,7 +28,7 @@ class Login extends CI_Controller
 				redirect(base_url().'admin/user_management');
 				break;
 			case 'owner':
-				redirect(base_url().'admin/user_owner');
+				redirect(base_url().'admin/user_worker');
 				break;	
 			case 'worker':
 				redirect(base_url().'admin/user_worker');

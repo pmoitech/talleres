@@ -29,17 +29,33 @@ a:hover
 </head>
 <body>
 	<div>
-		<a href='<?php echo site_url('examples/customers_management')?>'>Customers</a> |
-		<a href='<?php echo site_url('examples/orders_management')?>'>Orders</a> |
-		<a href='<?php echo site_url('examples/products_management')?>'>Products</a> |
-		<a href='<?php echo site_url('examples/offices_management')?>'>Offices</a> | 
-		<a href='<?php echo site_url('examples/employees_management')?>'>Employees</a> |		 
-		<a href='<?php echo site_url('examples/film_management')?>'>Films</a> |
-		<a href='<?php echo site_url('examples/multigrids')?>'>Multigrid [BETA]</a>
-		<li>&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href='<?php echo site_url('admin/close')?>'>Salida segura</a></li>
 
-		
+<b>Hola .<?php echo $this->session->userdata('nombre')." ".$this->session->userdata('idTaller'); ?> .!!!</b>
+<?php
+	if($this->session->userdata('perfil')=='admin'){ ?>
+		<li><a href='<?php echo site_url('admin/user_management')?>'>Administradores</a></li>
+		<li><a href='<?php echo site_url('admin/talleres')?>'>Talleres</a></li>
+		<li><a href='<?php echo site_url('admin/user_owner')?>'>Dueños</a></li>
+		<li><a href='<?php echo site_url('admin/user_worker')?>'>Trabajadores</a></li>
+		<li><a href='<?php echo site_url('admin/close')?>'>Salida segura</a></li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;
+        
+<?php 
+	}else
+	if($this->session->userdata('perfil')=='owner'){ ?>
+		<li><a href='<?php echo site_url('admin/user_worker')?>'>Trabajadores</a></li>
+		<li><a href='<?php echo site_url('admin/close')?>'>Salida segura</a></li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<?php 	
+	}else
+	if($this->session->userdata('perfil')=='worker'){?>
+		<li><a href='<?php echo site_url('admin/close')?>'>Salida segura</a></li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;
+	<?php 
+	}
+	?>
+
 	</div>
 	<div style='height:20px;'></div>  
     <div>
