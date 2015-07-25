@@ -16,7 +16,7 @@ class Login_model extends CI_Model {
    		if($consulta->num_rows() == 1) {   //el taller ingresado es correcto
    		$id_taller = $consulta->row('id_taller');
    		$nombre_taller = $consulta->row('taller_nombre');  //toma el dato del combre del taller ingresado
-
+		$codigo_taller = $consulta->row('taller_codigo');  //toma el dato del combre del taller ingresado
 		
 		$this->db->where('id_taller',$id_taller);
 		$this->db->where('usuario_usuario',$usuario_usuario);
@@ -25,7 +25,10 @@ class Login_model extends CI_Model {
 
 		if($query->num_rows() == 1)  //usuario y password correctos
 		{	
-			return  $query->row();
+			$data = $query->row();
+			$data->nombre_taller = $nombre_taller;  //envía el nombre del taller en data
+			$data->codigo_taller = $codigo_taller;  //envía el código del taller en data			
+			return  $data;
 		} 
 
 		else {
@@ -47,8 +50,11 @@ class Login_model extends CI_Model {
 	                'perfil'		=>		$check_user->usuario_perfil,
 	                'username' 		=> 		$check_user->usuario_usuario,
 	                'nombre' 		=> 		$check_user->usuario_nombres,
-	                'idTaller'		=>		$check_user->id_taller,
+	                'id_taller'		=>		$check_user->id_taller,
+	                'nombre_taller'	=>		$check_user->nombre_taller,
+	                'codigo_taller'	=>		$check_user->codigo_taller,
             		);
+
 		return $data;
 }
 }

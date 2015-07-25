@@ -28,10 +28,10 @@ class Login extends CI_Controller
 				redirect(base_url().'admin/user_management');
 				break;
 			case 'owner':
-				redirect(base_url().'admin/user_worker');
+				redirect(base_url().'admin/tasks');
 				break;	
 			case 'worker':
-				redirect(base_url().'admin/user_worker');
+				redirect(base_url().'admin/tasks');
 				break;
 			default:		
 				$data['titulo'] = 'Login con roles de usuario en codeigniter';
